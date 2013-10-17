@@ -6,7 +6,7 @@ function array2(arr,byval k,byval v)
   if not array2_is(arr) then arr = array(array(),array())
   if not arr_in(arr(0),k) then
     n = array2_max(arr(0))
-    n = iif(n > 0,n + 1,0)
+    n = iif(n < 0,0,n + 1)
     if inull(k) then k = n
     arr(0) = arr_push(arr(0),k)
     arr(1) = arr_push(arr(1),v)
@@ -41,7 +41,7 @@ function array2_ubound(arr)
 end function
 
 function array2_max(arr)
-  dim i,n,m : n = 0
+  dim i,n,m : n = -1
   for i = 0 to ubound(arr)
     if isnumeric(arr(i)) then
       m = clng(arr(i))

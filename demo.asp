@@ -31,8 +31,8 @@ array2 arr3,111,"aaa"
 array2 arr3,222,"bbb"
 array2 arr3,333,arr
 
-array2 arr2,null,arr
-array2 arr2,"2",arr3
+array2 arr2,"key",arr
+array2 arr2,"kkk",arr3
 array2 arr2,null,arr
 array2 arr2,null,3
 array2 arr2,null,4
@@ -40,7 +40,7 @@ array2 arr2,null,array(1,2,3,4,5)
 array2 arr2,8,array(6,7,8,9,0)
 
 foreach_arr arr2
-echo vbnewline & "------------" & ubound(arr2(0)) & vbnewline & array2_read(arr2,5)
+echo vbnewline & "------------" & ubound(arr2(0)) & vbnewline
 echo vbnewline & "" & ubound(array()) & vbnewline
 
 echo array2_dump(arr2,0)
