@@ -2,8 +2,11 @@
 'ASP键值对数组
 '依赖:EasyIDE ASP Framework
 '作者:Alone
+'邮箱:Alone@czrzj.com
 '主页:http://www.2n.hk/
 '时间:2013-10-17
+'说明:您可以免费使用此代码，但请在使用过程中保留上述信息。
+
 
 function array2(arr,byval k,byval v)
   dim n
