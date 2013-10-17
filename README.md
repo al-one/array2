@@ -62,12 +62,13 @@
   ...
 
 
-方法:array2_dump(arr)
+方法:array2_dump(arr,s)
 作用:遍历打印array2数组，用于调试
 参数:arr      array2数组
+参数:s        辅助参数，固定为0
 返回:string   遍历结果
 用法:
-  Response.Write array2_dump(arr)
+  Response.Write array2_dump(arr,0)
 
 
 
