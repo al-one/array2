@@ -1,6 +1,7 @@
 <pre>
 
 此方法可以让Asp数组像PHP数组一样拥有键。
+此方法依赖EasyIDE ASP Framework。
 
 
 方法:array2(arr,k,v)
@@ -59,5 +60,15 @@
     array2_rs arr,rs              '将Recordset集合转换成名为arr的array2数组
   end if
   ...
+
+
+方法:array2_dump(arr)
+作用:遍历打印array2数组，用于调试
+参数:arr      array2数组
+返回:string   遍历结果
+用法:
+  Response.Write array2_dump(arr)
+
+
 
 </pre>
