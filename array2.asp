@@ -1,6 +1,10 @@
 <%
 'ASP键值对数组
 '依赖:EasyIDE ASP Framework
+'作者:Alone
+'主页:http://www.2n.hk/
+'时间:2013-10-17
+
 function array2(arr,byval k,byval v)
   dim n
   if not array2_is(arr) then arr = array(array(),array())
@@ -54,7 +58,11 @@ end function
 function array2_is(arr)
   dim tmp : tmp = false
   if isarray(arr) then
-    if ubound(arr) = 1 then tmp = true
+    if ubound(arr) = 1 then
+      if isarray(arr(0)) and isarray(arr(1)) then
+        if ubound(arr(0)) = ubound(arr(1)) then tmp = true
+      end if
+    end if
   end if
   array2_is = tmp
 end function
