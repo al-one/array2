@@ -1,10 +1,10 @@
 <%
 'ASP键值对数组
-'依赖:EasyIDE ASP Framework
+'依赖:EasyIDE ASP Framework http://www.2n.hk/view/i-EasyIDE-ASP-Framework.html
 '作者:Alone
-'邮箱:Alone@czrzj.com
-'主页:http://www.2n.hk/
-'时间:2013-10-17
+'邮箱:Alone@an56.net
+'主页:http://www.al-one.cn/
+'时间:2013-12-25
 '说明:您可以免费使用此代码，但请在使用过程中保留上述信息。
 
 
@@ -12,9 +12,11 @@ function array2(arr,byval k,byval v)
   dim n
   if not array2_is(arr) then arr = array(array(),array())
   if not arr_in(arr(0),k) then
-    n = array2_max(arr(0))
-    n = iif(n < 0,0,n + 1)
-    if inull(k) then k = n
+    if inull(k) then
+      n = array2_max(arr(0))
+      n = iif(n < 0,0,n + 1)
+      k = n
+    end if
     arr(0) = arr_push(arr(0),k)
     arr(1) = arr_push(arr(1),v)
   else
@@ -52,7 +54,7 @@ function array2_max(arr)
   for i = 0 to ubound(arr)
     if isnumeric(arr(i)) then
       m = clng(arr(i))
-      if arr(i) > n then n = m
+      if m > n then n = m
     end if
   next
   array2_max = n
