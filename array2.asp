@@ -1,6 +1,6 @@
 <%
 'ASP键值对数组
-'依赖:EasyIDE ASP Framework http://www.2n.hk/view/i-EasyIDE-ASP-Framework.html
+'依赖:EasyIDE ASP Framework - http://www.2n.hk/view/i-EasyIDE-ASP-Framework.html
 '作者:Alone
 '邮箱:Alone@an56.net
 '主页:http://www.al-one.cn/
