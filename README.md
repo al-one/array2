@@ -77,17 +77,17 @@
 参数:arr      数组名
 返回:array2   array2类型的数组
 用法:
-  str = "<a>A</a><a>B</a>"
-  pat = "<a>(.*?)</a>"
+  str = "&lt;a&gt;A&lt;/a&gt;&lt;a&gt;B&lt;/a&gt;"
+  pat = "&lt;a&gt;(.*?)&lt;/a&gt;"
   array2_match str,pat,arr
     '返回的为多维数组，结构大致如下：
     arr => (
       0 => (
-        0 => <a>A</a>,
+        0 => &lt;a&gt;A&lt;/a&gt;,
         1 => A,
       ),
       1 => (
-        0 => <a>B</a>,
+        0 => &lt;a&gt;B&lt;/a&gt;,
         1 => B,
       ),
     )
