@@ -16,6 +16,14 @@
   array2 arr,0,"hi Alone"         '修改数组中key为0的元素的值为"hi Alone"
 
 
+方法:new_array2(arr)
+作用:初始化一个空的array2数组
+参数:arr      数组名
+返回:array2   array2类型的空数组
+用法:
+  new_array2 arr                  '初始化一个名为arr的空数组
+
+
 方法:array2_read(arr,k)
 作用:根据key读取数组中对应的值
 参数:arr      array2数组
@@ -62,13 +70,44 @@
   ...
 
 
-方法:array2_dump(arr,s)
+方法:array2_match(str,pat,arr)
+作用:执行一个正则表达式匹配
+参数:str      要搜索的字符串
+参数:pat      正则表达式
+参数:arr      数组名
+返回:array2   array2类型的数组
+用法:
+  str = "<a>A</a><a>B</a>"
+  pat = "<a>(.*?)</a>"
+  array2_match str,pat,arr
+    '返回的为多维数组，结构大致如下：
+    arr => (
+      0 => (
+        0 => <a>A</a>,
+        1 => A,
+      ),
+      1 => (
+        0 => <a>B</a>,
+        1 => B,
+      ),
+    )
+
+
+方法:array2_json_encode(arr)
+依赖:aspjson(<a href="https://code.google.com/p/aspjson/" target="_blank">点击获取</a>)
+作用:将arra2数组转换成json格式
+参数:arr      array2数组
+返回:string   json格式的字符串
+用法:
+  json = array2_json_encode(arr)
+
+
+方法:array2_dump(arr)
 作用:遍历打印array2数组，用于调试
 参数:arr      array2数组
-参数:s        辅助参数，固定为0
 返回:string   遍历结果
 用法:
-  Response.Write array2_dump(arr,0)
+  Response.Write array2_dump(arr)
 
 
 
