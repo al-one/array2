@@ -130,7 +130,7 @@
 用法:
   str = "&lt;a&gt;A&lt;/a&gt;&lt;a&gt;B&lt;/a&gt;"
   pat = "&lt;a&gt;(.*?)&lt;/a&gt;"
-  array2_match str,pat,arr
+  array2_match_php str,pat,arr
     '返回的为多维数组，结构大致如下：
     arr => (
       0 => (
