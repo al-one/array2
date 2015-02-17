@@ -105,18 +105,18 @@
 参数:arr      数组名
 返回:array2   array2类型的数组
 用法:
-  str = "&lt;a&gt;A&lt;/a&gt;&lt;a&gt;B&lt;/a&gt;"
-  pat = "&lt;a&gt;(.*?)&lt;/a&gt;"
+  str = "a=1&b=2"
+  pat = "\w+=(\w+)"
   array2_match str,pat,arr
     '返回的为多维数组，结构大致如下：
     arr => (
       0 => (
-        0 => &lt;a&gt;A&lt;/a&gt;,
-        1 => A,
+        0 => a=1,
+        1 => 1,
       ),
       1 => (
-        0 => &lt;a&gt;B&lt;/a&gt;,
-        1 => B,
+        0 => b=2,
+        1 => 2,
       ),
     )
 
@@ -128,18 +128,18 @@
 参数:arr      数组名
 返回:array2   array2类型的数组
 用法:
-  str = "&lt;a&gt;A&lt;/a&gt;&lt;a&gt;B&lt;/a&gt;"
-  pat = "&lt;a&gt;(.*?)&lt;/a&gt;"
-  array2_match_php str,pat,arr
+  str = "a=1&b=2"
+  pat = "\w+=(\w+)"
+  array2_match str,pat,arr
     '返回的为多维数组，结构大致如下：
     arr => (
       0 => (
-        0 => &lt;a&gt;A&lt;/a&gt;,
-        1 => &lt;a&gt;B&lt;/a&gt;,
+        0 => a=1,
+        1 => b=2,
       ),
       1 => (
-        0 => B,
-        1 => A,
+        0 => 1,
+        1 => 2,
       ),
     )
 
