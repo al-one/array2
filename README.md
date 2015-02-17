@@ -130,7 +130,7 @@
 用法:
   str = "a=1&b=2"
   pat = "\w+=(\w+)"
-  array2_match str,pat,arr
+  array2_match_php str,pat,arr
     '返回的为多维数组，结构大致如下：
     arr => (
       0 => (
