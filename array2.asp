@@ -4,7 +4,7 @@
 '作者:Alone
 '邮箱:Alone@an56.net
 '主页:http://www.2n.hk/
-'时间:2015-02-15
+'时间:2015-02-17
 '说明:您可以免费使用此代码，但请在使用过程中保留上述信息。
 
 
@@ -222,7 +222,7 @@ function array2_match_php(byval str,pat,arr)
         for i = 0 to pmc - 1
           array2 arr2,i,mat(i).SubMatches(j)
         next
-        array2 arr,j,arr2
+        array2 arr,j + 1,arr2
       next
     end if
   end if
