@@ -2,7 +2,7 @@
 ' EasyIDE ASP Framework By Alone
 ' 作者:Alone
 ' 邮箱:Alone@an56.net
-' 时间:2015-01-20
+' 时间:2015-02-28
 ' 说明:此函数库原作者“沉沦”，本人增加和修改了一些函数。
 '      您可以免费使用此库，但请在使用过程中保留上述信息。
 
@@ -499,14 +499,15 @@ end function
 '函数：返回格式化的时间字串
 function str_time(format,byval str)
   if inull(str) or not isdate(str) then exit function
-  dim tmp,y,yy,m,mm,d,dd,h,hh,i,ii,s,ss
+  dim tmp,y,yy,m,mm,d,dd,h,hh,i,ii,s,ss,u,uu
   tmp = format
-  y  = year(str)   : yy = right("0" & y,2)
-  m  = month(str)  : mm = right("0" & m,2)
-  d  = day(str)    : dd = right("0" & d,2)
-  h  = hour(str)   : hh = right("0" & h,2)
-  i  = minute(str) : ii = right("0" & i,2)
-  s  = second(str) : ss = right("0" & s,2)
+  y = year(str)   : yy = right("0" & y,2)
+  m = month(str)  : mm = right("0" & m,2)
+  d = day(str)    : dd = right("0" & d,2)
+  h = hour(str)   : hh = right("0" & h,2)
+  i = minute(str) : ii = right("0" & i,2)
+  s = second(str) : ss = right("0" & s,2)
+  u = DateDiff("s","1970-01-01 00:00:00",str) : uu = u * 1000
   tmp = replace(tmp,"yyyy",y,1,-1,1)
   tmp = replace(tmp,"yy",yy,1,-1,1)
   tmp = replace(tmp,"y",y,1,-1,1)
@@ -520,6 +521,8 @@ function str_time(format,byval str)
   tmp = replace(tmp,"i",i,1,-1,1)
   tmp = replace(tmp,"ss",ss,1,-1,1)
   tmp = replace(tmp,"s",s,1,-1,1)
+  tmp = replace(tmp,"uu",uu,1,-1,1)
+  tmp = replace(tmp,"u",u,1,-1,1)
   if instr(lcase(tmp),"w") > 0 then
     dim w,arr
     w = weekday(str)
@@ -549,7 +552,7 @@ end function
 '函数：获取URL参数串
 function str_query(del)
   dim tmp : tmp = Request.ServerVariables("QUERY_STRING")
-  if trim(del) = "" then str_query = tmp : exit function
+  if inull(del) then str_query = tmp : exit function
   tmp = str_param(tmp,del)
   str_query = tmp
 end function
@@ -557,7 +560,7 @@ end function
 '函数：处理URL参数串
 function str_param(str,del)
   dim tmp : tmp = str
-  if trim(del) = "" then str_query = tmp : exit function
+  if inull(tmp) or inull(del) then str_param = tmp : exit function
   dim arr : arr = split(tmp, "&")
   dim q, a, t : t = "" : tmp = ""
   for each q in arr
@@ -567,6 +570,19 @@ function str_param(str,del)
     end if
   next
   str_param = tmp
+end function
+
+'函数：预处理URL参数串
+function str_iparam(str,key,val)
+  dim tmp : tmp = str
+  if inull(tmp) then str_iparam = tmp : exit function
+  if inull(key) then
+    if not inull(val) then tmp = str_param(tmp,val)
+  else
+    tmp = str_param(tmp,key)
+    tmp = tmp & iif(inull(tmp),"","&") & key & "=" & val
+  end if
+  str_iparam = tmp
 end function
 
 '函数：字符串加密
