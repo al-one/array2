@@ -2,17 +2,18 @@
 ' EasyIDE ASP Framework By Alone
 ' 作者:Alone
 ' 邮箱:Alone@an56.net
-' 时间:2015-02-28
+' 时间:2015-05-16
 ' 说明:此函数库原作者“沉沦”，本人增加和修改了一些函数。
 '      您可以免费使用此库，但请在使用过程中保留上述信息。
 
 
-const OBJ_RST  = "ADODB.Recordset"
-const OBJ_CONN = "ADODB.Connection"
-const OBJ_STRM = "ADODB.Stream"
-const OBJ_FSO  = "Scripting.FilesyStemObject"
-const OBJ_XHTP = "MSXML2.XMLHTTP"
-const OBJ_DOM  = "MSXML2.DOMDocument"
+Const EASYIDE_CHARSET = "utf-8"
+Const OBJ_RST  = "ADODB.Recordset"
+Const OBJ_CONN = "ADODB.Connection"
+Const OBJ_STRM = "ADODB.Stream"
+Const OBJ_FSO  = "Scripting.FilesyStemObject"
+Const OBJ_XHTP = "MSXML2.XMLHTTP"
+Const OBJ_DOM  = "MSXML2.DOMDocument"
 
 
 '/////////基础操作函数部分
@@ -253,8 +254,8 @@ function sendmail(fromname,sendto,subject,body,from,serveraddress,username,passw
   set jmail = Server.CreateObject("JMAIL.Message")
   jmail.silent   = true
   jmail.logging  = true
-  jmail.charset  = "utf-8"
-  jmail.contenttype = "text/html; charset=utf-8"
+  jmail.charset  = EASYIDE_CHARSET
+  jmail.contenttype = "text/html; charset=" & EASYIDE_CHARSET
   jmail.addrecipient sendto
   jmail.fromname = fromname
   jmail.from     = from
@@ -296,7 +297,7 @@ function str_int(byval str)
   elseif str < min then
     str = min
   end if
-  str_int = str
+  str_int = int(str)
 end function
 
 '函数：转换为双精度数值
@@ -574,15 +575,22 @@ end function
 
 '函数：预处理URL参数串
 function str_iparam(str,key,val)
-  dim tmp : tmp = str
-  if inull(tmp) then str_iparam = tmp : exit function
-  if inull(key) then
-    if not inull(val) then tmp = str_param(tmp,val)
+  dim url,par,tmp
+  if str_test("^[^?=&]*\??",str) and not inull(str) then
+    tmp = instr(str,"?")
+    url = left(str,iif(tmp > 0,tmp - 1,len(str))) & "?"
+    par = right(str,len(str) - ifi(tmp,len(str)))
   else
-    tmp = str_param(tmp,key)
-    tmp = tmp & iif(inull(tmp),"","&") & key & "=" & val
+    url = ""
+    par = str
   end if
-  str_iparam = tmp
+  if inull(key) then
+    if not inull(par) and not inull(val) then par = str_param(par,val)
+  else
+    if not inull(par) then par = str_param(par,key)
+    par = par & iif(inull(par),"","&") & key & "=" & val
+  end if
+  str_iparam = url & par
 end function
 
 '函数：字符串加密
@@ -872,7 +880,7 @@ function file_read(path)
     with stream
       .type = 2 '文本类型
       .mode = 3 '读写模式
-      .charset = "utf-8"
+      .charset = EASYIDE_CHARSET
       .open
       .loadfromfile(Server.MapPath(path))
       tmp = .readtext()
@@ -889,7 +897,7 @@ function file_save(str,path,model)
   dim stream : set stream = Server.CreateObject(OBJ_STRM)
   with stream
     .type = 2 '文本类型
-    .charset = "utf-8"
+    .charset = EASYIDE_CHARSET
     .open
     .writetext str
     .savetofile(Server.MapPath(path)),model + 1
