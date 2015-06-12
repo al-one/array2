@@ -4,7 +4,7 @@
 '作者:Alone
 '邮箱:Alone@an56.net
 '主页:http://www.2n.hk/
-'时间:2015-02-17
+'时间:2015-03-12
 '说明:您可以免费使用此代码，但请在使用过程中保留上述信息。
 
 
@@ -124,11 +124,7 @@ function array2_is2(byval arr)
   if isobject(arr) then
     tmp = arr.Keys
     tmp = arr.Items
-    if Err.number = 0 then
-      tmp = true
-    else
-      tmp = false
-    end if
+    tmp = Err.number = 0
   end if
   array2_is = tmp
 end function
@@ -231,8 +227,10 @@ function array2_match_php(byval str,pat,arr)
 end function
 
 function array2_json_decode(arr,byval jss)
+  On Error Resume Next
   if inull(jss) then jss = "{}"
   set arr = array2_json_decode_js(array2_str2obj(jss))
+  if Err.number <> 0 then array2_new arr
   set array2_json_decode = arr
 end function
 
@@ -292,8 +290,10 @@ function array2_json_decode_js(jso)
 {
   var arr = new_array2(arr);
   if(typeof(jso) != 'object') return arr;
+  var isa = jso.constructor == Array;
   for(var k in jso)
   {
+    k = isa ? parseInt(k) : k;
     arr(k) = typeof(jso[k]) == 'object' ? array2_json_decode_js(jso[k]) : jso[k];
   }
   return arr;
